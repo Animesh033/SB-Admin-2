@@ -1,8 +1,5 @@
 <x-admin.app>
-    <x-slot name="title">
-       {{ $title }}
-    </x-slot>
-
+    <x-slot name="title"> {{ $title }} </x-slot>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -24,6 +21,15 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        @if(isset($pageHeading))
+                            <h1 class="h3 mb-0 text-gray-800">{{ $pageHeading }}</h1>
+                        @endif
+                        @if(isset($generateReport))
+                        {{$generateReport}}
+                        @endif
+                    </div>
+                    <x-alert></x-alert>
                     {{ $slot }}
 
                 </div>

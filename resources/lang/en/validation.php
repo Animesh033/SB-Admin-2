@@ -134,6 +134,36 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'name' => [
+            'required_without' => 'Please enter the customer details or Select the customer',
+        ],
+        'address' => [
+            'required_without' => 'Please enter the address',
+        ],
+        'contact_no' => [
+            'required_without' => 'Please enter contact number',
+        ],
+        'category.*' => [
+            'required' => 'Each Category field is required.',
+        ],
+        'width.*' => [
+            'required' => 'Each Width field is required.',
+        ],
+        'height.*' => [
+            'required' => 'Each Height field is required.',
+        ],
+        'shutter.*' => [
+            'required' => 'Each Shutter field is required.',
+        ],
+        'net.*' => [
+            'required' => 'Each Net field is required.',
+        ],
+        'sq_feet.*' => [
+            'required' => 'Each SQ Feet field is required.',
+        ],
+        'rate.*' => [
+            'required' => 'Each Rate field is required.',
+        ]
     ],
 
     /*
