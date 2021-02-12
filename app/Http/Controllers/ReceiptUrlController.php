@@ -2,19 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Billings\ReceiptUrl;
 use Illuminate\Http\Request;
-use App\Models\Billings\Billing;
-use App\Http\Requests\StoreBillingRequest;
-use App\Repositories\Eloquent\BillingRepositoryInterface;
 
-class BillingController extends Controller
+class ReceiptUrlController extends Controller
 {
-    private $billingRepository;
-
-    public function __construct(BillingRepositoryInterface $billingRepository)
-    {
-        $this->billingRepository = $billingRepository;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -22,8 +14,7 @@ class BillingController extends Controller
      */
     public function index()
     {
-        return view('admin.billings.index');
-
+        //
     }
 
     /**
@@ -33,7 +24,7 @@ class BillingController extends Controller
      */
     public function create()
     {
-        return view('admin.billings.create');
+        //
     }
 
     /**
@@ -42,19 +33,18 @@ class BillingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBillingRequest $request)
+    public function store(Request $request)
     {
-        $this->billingRepository->store($request);
-        return redirect()->back()->with('status', 'Quatation created successfully!');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Billings\Billing  $billing
+     * @param  \App\Models\Billings\ReceiptUrl  $receiptUrl
      * @return \Illuminate\Http\Response
      */
-    public function show(Billing $billing)
+    public function show(ReceiptUrl $receiptUrl)
     {
         //
     }
@@ -62,10 +52,10 @@ class BillingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Billings\Billing  $billing
+     * @param  \App\Models\Billings\ReceiptUrl  $receiptUrl
      * @return \Illuminate\Http\Response
      */
-    public function edit(Billing $billing)
+    public function edit(ReceiptUrl $receiptUrl)
     {
         //
     }
@@ -74,10 +64,10 @@ class BillingController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Billings\Billing  $billing
+     * @param  \App\Models\Billings\ReceiptUrl  $receiptUrl
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Billing $billing)
+    public function update(Request $request, ReceiptUrl $receiptUrl)
     {
         //
     }
@@ -85,10 +75,10 @@ class BillingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Billings\Billing  $billing
+     * @param  \App\Models\Billings\ReceiptUrl  $receiptUrl
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Billing $billing)
+    public function destroy(ReceiptUrl $receiptUrl)
     {
         //
     }

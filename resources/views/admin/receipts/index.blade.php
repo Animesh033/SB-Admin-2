@@ -1,6 +1,6 @@
 <x-admin.layout>
-    <x-slot name="title">Customers</x-slot>
-    <x-slot name="pageHeading">All Customers</x-slot>
+    <x-slot name="title">Receipts</x-slot>
+    <x-slot name="pageHeading">All Receipts</x-slot>
     <div class="card card-radius-20 mb-5">
         <div class="card-body">
             <div class="table-responsive">
@@ -11,9 +11,8 @@
                             <th scope="col">Name</th>
                             <th scope="col">Address</th>
                             <th scope="col">Contact No</th>
-                            <th scope="col">Quotation No</th>
+                            <th scope="col">Receipt No</th>
                             <th scope="col">Date</th>
-                            <th scope="col">Amount</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -21,58 +20,57 @@
                             @foreach ($customers as $key => $customer)
                                 <tr>
                                     <td scope="col">{{ $key+1 }}</td>
-                                    <td scope="col"><a href="{{route('customers.show', $customer->id)}}">{{ $customer->name }}</a></td>
+                                    <td scope="col"><a href="{{route('receipts.show', $customer->id)}}">{{ $customer->name }}</a></td>
                                     <td scope="col">{{ $customer->address }}</td>
                                     <td scope="col">{{ $customer->contact_no }}</td>
                                     @php
-                                        $billings = $customer->billings();
-                                        if (isset($billing_no) && $billing_no)
-                                            $billings = $billings->wherePivot('billing_no', $billing_no);
-                                        $billings = $billings->get();
-                                        $billingNos = collect([]);
+                                        $receipts = $customer->receipts();
+                                        if (isset($receipt_no) && $receipt_no)
+                                            $receipts = $receipts->where('receipt_no', $receipt_no);
+                                        $receipts = $receipts->get();
+                                        $receiptNos = collect([]);
                                     @endphp
                                     <td scope="col">
                                         <ol type="A">
-                                            @foreach ($billings as $key => $billing)
+                                            @foreach ($receipts as $key => $receipt)
                                             @php
-                                                $billingNo = $billing->pivot->billing_no;
+                                                $receiptNo = $receipt->receipt_no;
                                             @endphp
-                                                @if (!$billingNos->containsStrict($billingNo))
-                                                    <li><a href="{{$billing->getQuotationPDFUrl($billingNo)}}" target="_blank">{{$billingNo }}</a></li>
-                                                    @if ($key >= 2)
-                                                        <a href="{{route('customers.show', $customer->id)}}" class="float-right">...More</a>
-                                                        @break
-                                                    @endif
-                                                    @php
-                                                    $billingNos->push($billingNo);
-                                                    @endphp
-                                                @endif
-                                            @endforeach
-                                        </ol>
-                                    </td>
-                                    @php
-                                        $billingNos = collect([]);
-                                    @endphp
-                                    <td scope="col">
-                                        <ol type="A">
-                                            @foreach ($billings as $key => $billing)
-                                            @php
-                                                $billingNo = $billing->pivot->billing_no;
-                                            @endphp
-                                                @if (!$billingNos->containsStrict($billingNo))
-                                                    <li><a href="">{{$billing->created_at}}</a></li>
+                                                @if (!$receiptNos->containsStrict($receiptNo))
+                                                    <li><a href="{{$receipt->getReceiptUrl($receiptNo)}}" target="_blank">{{$receiptNo }}</a></li>
                                                     @if ($key >= 2)
                                                         <a href="" class="float-right">...More</a>
                                                         @break
                                                     @endif
                                                     @php
-                                                    $billingNos->push($billingNo);
+                                                    $receiptNos->push($receiptNo);
                                                     @endphp
                                                 @endif
                                             @endforeach
                                         </ol>
                                     </td>
-                                    <td scope="col">{{ format_amount($customer->billings_sum_amount) }}</td>
+                                    @php
+                                        $receiptNos = collect([]);
+                                    @endphp
+                                    <td scope="col">
+                                        <ol type="A">
+                                            @foreach ($receipts as $key => $receipt)
+                                            @php
+                                                $receiptNo = $receipt->receipt_no;
+                                            @endphp
+                                                @if (!$receiptNos->containsStrict($receiptNo))
+                                                    <li><a href="">{{$receipt->created_at}}</a></li>
+                                                    @if ($key >= 2)
+                                                        <a href="" class="float-right">...More</a>
+                                                        @break
+                                                    @endif
+                                                    @php
+                                                    $receiptNos->push($receiptNo);
+                                                    @endphp
+                                                @endif
+                                            @endforeach
+                                        </ol>
+                                    </td>
                                 </tr>
                             @endforeach
                         @else

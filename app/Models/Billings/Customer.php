@@ -2,9 +2,10 @@
 
 namespace App\Models\Billings;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Billings\Receipt;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Customer extends Model
 {
@@ -19,7 +20,7 @@ class Customer extends Model
 
     /**
      * =============================== Polymorphic One To Many========================
-     * */ 
+     * */
 
     // public function billings()
     // {
@@ -28,7 +29,7 @@ class Customer extends Model
 
     /**
      * =============================== Polymorphic Many To Many========================
-     * */ 
+     * */
 
     /**
      * Get all of the customer's billings.
@@ -37,4 +38,14 @@ class Customer extends Model
     {
         return $this->morphToMany(Billing::class, 'billingable')->withPivot('billing_no');
     }
+
+    public function receipts()
+    {
+        return $this->hasMany(Receipt::class);
+    }
+
+    // public function receiptUrls()
+    // {
+    //     return $this->hasManyThrough(ReceiptUrl::class, Receipt::class);
+    // }
 }

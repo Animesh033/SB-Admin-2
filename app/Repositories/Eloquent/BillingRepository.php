@@ -4,7 +4,6 @@ namespace App\Repositories\Eloquent;
 
 use PDF;
 use Carbon\Carbon;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Billings\Billing;
 use App\Models\Billings\Category;
@@ -18,21 +17,21 @@ use App\Repositories\Eloquent\BillingRepositoryInterface;
 class BillingRepository extends BaseRepository implements BillingRepositoryInterface
 {
 
-     protected $model;
+     protected $billing;
 
-    public function __construct(Billing $model)
+    public function __construct(Billing $billing)
     {
-        $this->model = $model;
+        $this->billing = $billing;
     }
 
     public function create(array $attributes): Model
     {
-        return $this->model->create($attributes);
+        return $this->billing->create($attributes);
     }
 
     public function find($id): ?Model
     {
-        return $this->model->find($id);
+        return $this->billing->find($id);
     }
 
     public function store(Request $request)
@@ -108,9 +107,9 @@ class BillingRepository extends BaseRepository implements BillingRepositoryInter
             $billing_no =  $billingNo;
             $pdf = PDF::loadView('admin.billings.billings-pdf', compact('categories', 'customer', 'billing_no'));
             if (isset($pdf) && $pdf) {
-                $pdfName = Str::ucfirst($customer->name).'_'.$billingNo.'.pdf';
+                $pdfName = ucfirst($customer->name).'_'.$billingNo.'.pdf';
 
-                $pdfPath = 'public/pdf/';
+                $pdfPath = config('billings.quotation.pdf_path');
 
                 $stored = Storage::put($pdfPath.$pdfName, $pdf->output());
 

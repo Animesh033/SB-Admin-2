@@ -16,7 +16,7 @@
             <tr>
                 <th scope="col" colspan="1">DATE</th>
                 <th scope="col" colspan="7" style="text-align: left;">
-                    @if(isset($billing_no) && $billing_no) 
+                    @if(isset($billing_no) && $billing_no)
                         {{ $categories[0]->billings[0]->created_at}}
                     @endif
                 </th>

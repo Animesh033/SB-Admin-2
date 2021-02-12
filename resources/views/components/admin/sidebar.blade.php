@@ -37,9 +37,10 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Components:</h6>
                 <a class="collapse-item" href="{{ route('customers.index') }}">All Customers</a>
-                <a class="collapse-item" href="{{ route('billings.index') }}">All Quotations</a>
+                {{-- <a class="collapse-item" href="{{ route('billings.index') }}">All Quotations</a> --}}
                 <a class="collapse-item" href="{{ route('billings.create') }}">Create Quotation</a>
-                {{-- <a class="collapse-item" href="{{ route('quotation.show') }}">Cards</a> --}}
+                <a class="collapse-item" href="{{ route('receipts.index') }}">All Receipts</a>
+                <a class="collapse-item" href="{{ route('receipts.create') }}">Create Receipt</a>
             </div>
         </div>
     </li>

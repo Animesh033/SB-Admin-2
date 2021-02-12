@@ -14,7 +14,8 @@ class Quotation extends Model
 
     public function getQuotationUrlAttribute($fileName)
     {
-        return  asset('storage/pdf/'.$fileName);
+        $storagePath = config('billings.quotation.storage_path');
+        return  asset($storagePath.$fileName);
     }
 
     public function getCreatedAtAttribute($createdAt)
